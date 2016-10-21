@@ -1,0 +1,3 @@
+# Ejecuta el emulador QEMU para simular Raspberry Pi.
+
+/home/cag10/myapps/qemu-rpi-system/bin/qemu-system-arm -kernel $1 -cpu arm1176 -m 256 -M raspi -serial stdio
