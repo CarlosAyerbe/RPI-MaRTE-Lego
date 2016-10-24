@@ -1,0 +1,8 @@
+GNAT:
+
+1º)PATH="/home/carlos/gnat/gnatARM/bin:$PATH"; export PATH
+2º)PATH="/home/carlos/gnat/gnatX86/bin:$PATH"; export PATH
+
+MARTE:
+
+3º)PATH="$PATH:/home/carlos/marte_2.0_04Oct2016/utils"; export PATH
