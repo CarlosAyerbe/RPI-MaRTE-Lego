@@ -1,0 +1,16 @@
+arm-eabi-gcc -dumpversion
+32 bits
+
+sudo apt-get install ia32-libs
+
+I had the same problem when trying to compile the Raspberry Pi kernel. I was cross-compiling on Ubuntu 12.04 64-bit and the toolchain requires ia32-libs to work on on a 64-bit system.
+
+sudo apt-get install lib32z1 lib32ncurses5 lib32bz2-1.0
+
+no se encuentra archivo
+librerias y dependencias
+glibc-devel
+
+
+-Borrar qemu:
+ sudo apt-get purge --auto-remove qemu-system-arm
