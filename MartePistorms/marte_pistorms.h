@@ -1,5 +1,3 @@
-
-
 /**
  * @file marte_pistorms.h
  * @author Carlos Ayerbe González
@@ -39,45 +37,60 @@
 #define PORT_1_SENSOR_ID	0x71
 #define PORT_1_MODE		0x81
 #define PORT_1_DATA		0x83
+#define PORT_1_DATA_RESET	0x84
+
 #define PORT_2_READY		0xA4
 #define PORT_2_SENSOR_ID	0xA5	
 #define PORT_2_MODE		0xB5
 #define PORT_2_DATA		0xB7
+#define PORT_2_DATA_RESET	0xB8
 
 /*! IDs of EV3 Sensors  */
-#define GYRO_SENSOR_ID		"GYRO-RAT"
+#define GYRO_SENSOR_ID		"GYRO-RATE"
 #define TOUCH_SENSOR_ID		"Touch"
+#define ULTRASONIC_SENSOR_ID	"US-DIST-CM"
 
 /* Sensor Type Modes */
+#define PS_SENSOR_TYPE_EV3_SWITCH 18
 #define TOUCH_TYPE		18
 #define EV3_TYPE		19
 
 /* Modes of EV3 Sensors */
 
 /* Color */
-#define REFLECTED_LIGHT	0x00
-#define AMBIENT_LIGHT	0x01
-#define MEASURE_COLOR	0x02
+#define REFLECTED_LIGHT	0
+#define AMBIENT_LIGHT	1
+#define MEASURE_COLOR	2
 
 /* Gyro */
-#define ANGLE		0x00
-#define RATE		0x01
+#define ANGLE		0
+#define RATE		1
 
 /* Infrared */
-#define PROXIMITY	0x00
-#define BEACON		0x01
-#define REMOTE		0x02
+#define PROXIMITY	0
+#define BEACON		1
+#define REMOTE		2
 
 /* Ultrasonic */
-#define PROXIMITY_CENTIMETERS	0x00
-#define PROXIMITY_INCHES	0x01
-#define PRESENCE		0x02
+#define PROXIMITY_CENTIMETERS	0
+#define PROXIMITY_INCHES	1
+#define PRESENCE		2
 
 
 /* Reason codes */
 #define PISTORMS_ERROR_NOT_INITIALIZED  "ERROR"
 #define PISTORMS_ERROR_NOT_CONNECTOR	0x01
 #define PISTORMS_ERROR_BAD_CONNECTOR	"ERROR"
+
+/*I2C Registers for Buttons and LEDs*/
+#define PISTORMS_LED_RED_VALUE		0xD7
+#define PISTORMS_LED_GREEN_VALUE	0xD8
+#define PISTORMS_LED_BLUE_VALUE		0xD9
+#define PISTORMS_INPUT_BUTTON_VALUE	0xDA
+#define PISTORMS_INPUT_BUTTON_COUNT	0xDB
+#define PISTORMS_INPUT_TOUCH_SCREEN_X	0xE3
+#define PISTORMS_INPUT_TOUCH_SCREEN_Y	0xE5
+#define PISTORMS_INPUT_BATTERY_VOLTAGE	0x6E
 
 /**
 * @brief Initialise the bcm2835 library and start I2C operations 
@@ -127,77 +140,6 @@ char _set_active_bank(int connector_id);
 * 
 */
 char * pistorms_get_device_id(int connector_id);
-
-
-/**
-* @brief Determine sensor type of Touch Sensor.
-* @param connector_id Bank and Port to plug the Touch sensor
-* @return reason see \ref bcm2835I2CReasonCodes
-* 
-* Configure the type mode to Touch sensor(EV3 Switch ---> value 18), because default mode of Sensor
-* Type Modes in Pistorms is EV3 ----> value 19. So it is neccesary to change this value to use
-* touch Sensor.
-* 
-*/
-#define PS_SENSOR_TYPE_EV3_SWITCH 18
-int pistorms_port_set_type_sensor(int connector_id,int type);
-int pistorms_set_mode_sensor(int mode);
-
-
-/**
-* @brief Obtain the mode that the EV3 Sensor is running.
-* @param connector_id Bank and Port to plug the EV3 sensor
-* @return value depends on the mode of the sensor(value ---> 0,1 or 2)
-* 
-* Gets the  mode of EV3 Sensor. 
-* Default mode is 0 for all EV3 Sensors.
-* Gyro Sensor --- 
-* 		|--->value = 0 -> ANGLE
-* 		|--->value = 1 -> RATE
-* Color Sensor --- 
-* 		  |--->value = 0 -> REFLECTED_LIGHT
-* 		  |--->value = 1 -> AMBIENT_LIGHT
-* 		  |--->value = 2 -> MEASURE_COLOR
-* Infrared Sensor --- 
-* 		    |--->value = 0 -> PROXIMITY
-* 		    |--->value = 1 -> BEACON
-* 		    |--->value = 2 -> REMOTE
-* Ultrasonic Sensor --- 
-* 		      |--->value = 0 -> PROXIMITY_CENTIMETERS
-* 		      |--->value = 1 -> PROXIMITY_INCHES
-* 		      |--->value = 2 -> PRESENCE
-*/
-int pistorms_sensor_get_mode(int connector_id);
-
-/**
-* @brief Set the mode for the EV3 Sensor.
-* @param connector_id Bank and Port to plug the EV3 sensor
-* @param mode Mode of the Sensor
-* @return reason see \ref bcm2835I2CReasonCodes
-* 
-* Gets the  mode of EV3 Sensor. 
-* Default mode is 0 for all EV3 Sensors.
-* Gyro Sensor --- 
-* 		|--->value = 0 -> ANGLE
-* 		|--->value = 1 -> RATE
-* Color Sensor --- 
-* 		  |--->value = 0 -> REFLECTED_LIGHT
-* 		  |--->value = 1 -> AMBIENT_LIGHT
-* 		  |--->value = 2 -> MEASURE_COLOR
-* Infrared Sensor --- 
-* 		    |--->value = 0 -> PROXIMITY
-* 		    |--->value = 1 -> BEACON
-* 		    |--->value = 2 -> REMOTE
-* Ultrasonic Sensor --- 
-* 		      |--->value = 0 -> PROXIMITY_CENTIMETERS
-* 		      |--->value = 1 -> PROXIMITY_INCHES
-* 		      |--->value = 2 -> PRESENCE
-*/
-int pistorms_sensor_set_mode(int connector_id, int mode);
-
-
-int pistorms_sensor_read(int connector_id);
-
 
 
 
