@@ -20,9 +20,30 @@ char *angle_data;
 char *rate_data;
 
 /*
+ * Detects if the Gyro Sensor is connect correctly.
+ * */
+int pistorms_sensor_proof_gyro(int connector_id){
+  
+    char *GYRO_id;
+    GYRO_id = pistorms_get_device_id(connector_id);
+    
+    if(strcmp(GYRO_id, GYRO_SENSOR_ID) != 0){
+	
+	printf("Error ID:%s",GYRO_id);
+	return 0;
+  
+    }else{
+    
+	printf("ID Correcto:%s", GYRO_id);
+	return 1;
+  
+    }
+ }
+ 
+/*
  * Gyro Sensor keeps track of the total rotation angle in degrees 
  * */
-char * pistorms_gyroAngleEV3(int connector_id){
+short pistorms_gyroAngleEV3(int connector_id){
   
   pistorms_sensor_set_mode(connector_id,ANGLE);
   int x;
@@ -34,15 +55,19 @@ char * pistorms_gyroAngleEV3(int connector_id){
       y=0;
        
       }
-  angle_data = pistorms_sensor_read(connector_id);
-  return angle_data;
+  
+    angle_data = pistorms_sensor_read(connector_id);
+  
+   unsigned short value = angle_data[0] + (angle_data[1] << 8);
+   short angle_final = (short)value;
+   return angle_final;
 }
 
 
 /*
  * Detects rotational motion on a single axis
  * */
-char * pistorms_gyroRateEV3(int connector_id){
+short pistorms_gyroRateEV3(int connector_id){
   
   pistorms_sensor_set_mode(connector_id,RATE);
   int x;
@@ -55,7 +80,10 @@ char * pistorms_gyroRateEV3(int connector_id){
        
       }
   rate_data = pistorms_sensor_read(connector_id);
-  return rate_data;
+  
+  unsigned short value = rate_data[0] + (rate_data[1] << 8);
+  short rate_final = (short)value;
+  return rate_final;
   
   
 }

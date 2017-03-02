@@ -18,6 +18,18 @@
 
 #include "marte_pistorms_sensors.h"
 
+
+/**
+* @brief Detects if the Touch Sensor is connect correctly.
+* @param connector_id Bank and Port to plug the sensor
+* @return  0 if there is an error, or 1 if the sensor is correct.
+* 
+* If the Touch sensor is connect, the function is going to return 1 if it is connect correctly
+* or 0 if it isn't.
+* 
+*/
+int pistorms_sensor_proof_ultrasonic(int connector_id);
+
 /**
 * @brief check if the sensor is touched
 * @param connector_id Bank and Port to plug the sensor

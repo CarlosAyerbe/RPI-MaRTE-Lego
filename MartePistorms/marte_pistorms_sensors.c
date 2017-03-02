@@ -24,17 +24,13 @@ int pistorms_port_set_type_sensor(int connector_id, int type){
     char bufType[2];
     bufType[0] = 0;
     bufType[1] = type;	/**< Value of Type mode */
-    
-  //  if (!initialized) {
-   //   return PISTORMS_ERROR_NOT_CONNECTOR;
-   // }
   
     _set_active_bank(connector_id);
     
-     if (connector_id = PORT_1){
+    if((connector_id == BANK_A_PORT_1) ||(connector_id == BANK_B_PORT_1)){
 	bufType[0] = PORT_TYPE_1;
        
-    }else if (connector_id = PORT_2){
+    }else if((connector_id == BANK_A_PORT_2) ||(connector_id == BANK_B_PORT_2)){
 	bufType[0] = PORT_TYPE_2;
       
     } else {
@@ -60,16 +56,12 @@ int pistorms_sensor_get_mode(int connector_id){
     char bufSensorMode[10] = {0};
     char sensorMode; 
   
-   // if (!initialized) {
-//	return PISTORMS_ERROR_NOT_CONNECTOR;
-   // }
-    
      _set_active_bank(connector_id);
     
-     if (connector_id = PORT_1){
+     if((connector_id == BANK_A_PORT_1) ||(connector_id == BANK_B_PORT_1)){
 	sensorMode = PORT_1_MODE;
        
-    }else if (connector_id = PORT_2){
+    }else if((connector_id == BANK_A_PORT_2) ||(connector_id == BANK_B_PORT_2)){
 	sensorMode = PORT_2_MODE;
       
     } else {
@@ -89,19 +81,16 @@ int pistorms_sensor_get_mode(int connector_id){
  * */
 int pistorms_sensor_set_mode(int connector_id, int mode){
   
-  //  if (!initialized) {
-   //   return PISTORMS_ERROR_NOT_CONNECTOR;
-   // }
     char bufMode[2];
     bufMode[0] =0;
     bufMode[1] = mode;
     
      _set_active_bank(connector_id);
     
-     if (connector_id = PORT_1){
+    if((connector_id == BANK_A_PORT_1) ||(connector_id == BANK_B_PORT_1)){
 	bufMode[0] = PORT_1_MODE;
        
-    }else if (connector_id = PORT_2){
+    }else if((connector_id == BANK_A_PORT_2) ||(connector_id == BANK_B_PORT_2)){
 	bufMode[0] = PORT_2_MODE;
       
     } else {
@@ -114,22 +103,20 @@ int pistorms_sensor_set_mode(int connector_id, int mode){
  
 }  
 
-
+/*
+ * Read the data of EV3 sensors.
+ * */
 char * pistorms_sensor_read(int connector_id){
   
     //char bufSensorData[32] = {0};
     char sensorData;
-    
-  //  if (!initialized) {
-   //   return PISTORMS_ERROR_BAD_CONNECTOR;
-    //}
-   
+
      _set_active_bank(connector_id);
     
-     if (connector_id = PORT_1){
+     if((connector_id == BANK_A_PORT_1) ||(connector_id == BANK_B_PORT_1)){
 	sensorData = PORT_1_DATA;
        
-    }else if (connector_id = PORT_2){
+    }else if((connector_id == BANK_A_PORT_2) ||(connector_id == BANK_B_PORT_2)){
 	sensorData = PORT_2_DATA;
       
     } else {

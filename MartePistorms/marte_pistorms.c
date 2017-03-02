@@ -60,14 +60,15 @@ int pistorms_close(void){
  * */
 char _set_active_bank(int connector_id){
   
-     //printf("Primer active_bank == %x\n", active_bank);
-    if(connector_id == (BANK_A & (PORT_1 || PORT_2))){
+  // printf("Primer active_bank == %x\n", active_bank);
+    if((connector_id == BANK_A_PORT_1) ||(connector_id == BANK_A_PORT_2)) {
+    
 	if(active_bank == BANK_A){
 	  // printf("Mismo active_bank A== %x\n", active_bank);
 	  return active_bank;
 	  
 	}else{
-	  // printf("Slave Address = A\n");
+	 //  printf("Slave Address = A\n");
 	  bcm2835_i2c_setSlaveAddress(BANK_A_ADDR);
 	  active_bank = BANK_A;
 	  return active_bank;
@@ -75,7 +76,7 @@ char _set_active_bank(int connector_id){
 	}
 	    
       
-    }else if(connector_id == (BANK_B & (PORT_1 || PORT_2))){
+    }else if((connector_id == BANK_B_PORT_1) ||(connector_id == BANK_B_PORT_2)) {
       if(active_bank == BANK_B){
 	// printf("Mismo active_bank B== %x\n", active_bank);
 	return active_bank;
@@ -106,9 +107,9 @@ char * pistorms_get_device_id(int connector_id){
     _set_active_bank(connector_id);
     
     char sensorID; 
-    if (connector_id = PORT_1){
+    if((connector_id == BANK_A_PORT_1) ||(connector_id == BANK_B_PORT_1)){
 	sensorID = PORT_1_SENSOR_ID;
-    }else if (connector_id = PORT_2){
+    }else if((connector_id == BANK_A_PORT_2) ||(connector_id == BANK_B_PORT_2)){
 	sensorID = PORT_2_SENSOR_ID;
     } else {
       return PISTORMS_ERROR_BAD_CONNECTOR;

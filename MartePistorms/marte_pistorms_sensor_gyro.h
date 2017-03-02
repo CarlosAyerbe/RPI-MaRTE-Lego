@@ -17,6 +17,18 @@
 
 #include "marte_pistorms_sensors.h"
 
+
+/**
+* @brief Detects if the Gyro Sensor is connect correctly.
+* @param connector_id Bank and Port to plug the sensor
+* @return  0 if there is an error, or 1 if the sensor is correct.
+* 
+* If the Gyro sensor is connect, the function is going to return 1 if it is connect correctly
+* or 0 if it isn't.
+* 
+*/
+int pistorms_sensor_proof_ultrasonic(int connector_id);
+
 /**
 * @brief Gyro Sensor keeps track of the total rotation angle  in degrees.
 * @param connector_id Bank and Port to plug the sensor
@@ -27,7 +39,7 @@
 * program turns (on the axis the Gyro Sensor is measuring) with an
 * accuracy of +/- 3 degrees for a 90-degree turn.
 */
-char * pistorms_gyroAngleEV3(int connector_id);
+short pistorms_gyroAngleEV3(int connector_id);
 
 /**
 * @brief Detects rotational motion on a single axis.
@@ -39,7 +51,7 @@ char * pistorms_gyroAngleEV3(int connector_id);
 * the rate of rotation in degrees per second. (The sensor can measure
 * a maximum rate of spin of 440 degrees per second
 */
-char * pistorms_gyroRateEV3(int connector_id);
+short pistorms_gyroRateEV3(int connector_id);
 
 
 
