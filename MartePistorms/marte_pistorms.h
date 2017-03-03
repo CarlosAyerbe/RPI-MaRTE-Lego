@@ -134,52 +134,52 @@
 #define MOTOR_GO		0x80
 
 /**
-* @brief Initialise the bcm2835 library and start I2C operations 
-* @return  return 1 if successful else 0
-* 
-* Initialise the bcm2835 calling the function bcm2835_init() and start I2C 
-* operations calling bcm2835_i2c_begin(), if there is some error the
-* function is going to return 0 , if not the function is going to return 1.
-* 
-*/
+ * @brief Initialise the bcm2835 library and start I2C operations 
+ * @return  return 1 if successful else 0
+ * 
+ * Initialise the bcm2835 calling the function bcm2835_init() and start I2C 
+ * operations calling bcm2835_i2c_begin(), if there is some error the
+ * function is going to return 0 , if not the function is going to return 1.
+ * 
+ */
 int pistorms_init(void);
 
 
 /**
-* @brief Close the bcm2835 library and end I2C operations 
-* @return  return 1 if successful else 0
-* 
-* Close the bcm2835 calling the function bcm2835_close() and end I2C 
-* operations calling bcm2835_i2c_end(), if there is some error the
-* function is going to return 0 , if not the function is going to return 1.
-* 
-*/
+ * @brief Close the bcm2835 library and end I2C operations 
+ * @return  return 1 if successful else 0
+ * 
+ * Close the bcm2835 calling the function bcm2835_close() and end I2C 
+ * operations calling bcm2835_i2c_end(), if there is some error the
+ * function is going to return 0 , if not the function is going to return 1.
+ * 
+ */
 int pistorms_close(void);
 
 
 /**
-* @brief Sets the I2C slave address.
-* @param connector_id Bank and Port to plug the sensor
-* @return  the value of active_bank, -1 if is incorrect
-* 
-* Sets the I2C slave address (BANK_A or BANKB_B).
-* But if the current slave address is the same than the connector_id, the function
-* doesn't set again the slave address because it is not neccessary.
-*/
+ * @brief Sets the I2C slave address.
+ * @param connector_id Bank and Port to plug the sensor
+ * @return  the value of active_bank, -1 if is incorrect
+ * 
+ * Sets the I2C slave address (BANK_A or BANKB_B).
+ * But if the current slave address is the same than the connector_id, the function
+ * doesn't set again the slave address because it is not neccessary.
+ */
 char _set_active_bank(int connector_id);
 
 
 /**
-* @brief Obtain the ID of the sensor
-* @param connector_id Bank and Port to plug the sensor
-* @return  the ID of the sensor if it is plugged in,if not error. 
-* 
-* Obtains the ID of the Sensor which is plugged in the correct port of the Pistorms.
-* For a correct result, it is neccesary to indicate the bank and port that the sensor
-* is plugged in. If the sensor is connected in other port or bank, the function returns
-* an error.
-* 
-*/
+ * @brief Obtain the ID of the sensor
+ * @param connector_id Bank and Port to plug the sensor
+ * @return  the ID of the sensor if it is plugged in,if not error. 
+ * 
+ * Obtains the ID of the Sensor which is plugged in the correct port of the Pistorms.
+ * For a correct result, it is neccesary to indicate the bank and port that the sensor
+ * is plugged in. If the sensor is connected in other port or bank, the function returns
+ * an error.
+ * 
+ */
 char * pistorms_get_device_id(int connector_id);
 
 

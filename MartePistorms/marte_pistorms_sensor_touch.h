@@ -20,43 +20,43 @@
 
 
 /**
-* @brief Detects if the Touch Sensor is connect correctly.
-* @param connector_id Bank and Port to plug the sensor
-* @return  0 if there is an error, or 1 if the sensor is correct.
-* 
-* If the Touch sensor is connect, the function is going to return 1 if it is connect correctly
-* or 0 if it isn't.
-* 
-*/
+ * @brief Detects if the Touch Sensor is connect correctly.
+ * @param connector_id Bank and Port to plug the sensor
+ * @return  0 if there is an error, or 1 if the sensor is correct.
+ * 
+ * If the Touch sensor is connect, the function is going to return 1 if it is connect correctly
+ * or 0 if it isn't.
+ * 
+ */
 int pistorms_sensor_proof_ultrasonic(int connector_id);
 
 /**
-* @brief check if the sensor is touched
-* @param connector_id Bank and Port to plug the sensor
-* @return  true if it is touched
-* 
-* Check if the sensor is touched, if it is pressed the function returns True, 
-* if not, it returns False.
-*/
+ * @brief check if the sensor is touched
+ * @param connector_id Bank and Port to plug the sensor
+ * @return  true if it is touched
+ * 
+ * Check if the sensor is touched, if it is pressed the function returns True, 
+ * if not, it returns False.
+ */
 int pistorms_isTouchedEV3(int connector_id);
 
 /**
-* @brief Count how many times the sensor was touched
-* @param connector_id Bank and Port to plug the sensor
-* @return  count of touches since last reset (or power on)
-* 
-* With PiStorms it is possible to count how many times the sensor was touched.
-* This count is maintained since the PiStorms was powered on. You can reset this 
-* count with \ref pistorms_resetTouchesEV3.
-*/
+ * @brief Count how many times the sensor was touched
+ * @param connector_id Bank and Port to plug the sensor
+ * @return  count of touches since last reset (or power on)
+ * 
+ * With PiStorms it is possible to count how many times the sensor was touched.
+ * This count is maintained since the PiStorms was powered on. You can reset this 
+ * count with \ref pistorms_resetTouchesEV3.
+ */
 int pistorms_numTouchesEV3(int connector_id);
 
 /**
-* @brief Reset the count
-* @param connector_id Bank and Port to plug the sensor
-* 
-* With this function, is possible reset the count of touches.
-*/
+ * @brief Reset the count
+ * @param connector_id Bank and Port to plug the sensor
+ * 
+ * With this function, is possible reset the count of touches.
+ */
 void pistorms_resetTouchesEV3(int connector_id);
 
 

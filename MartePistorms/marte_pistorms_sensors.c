@@ -7,6 +7,7 @@
  * 
  */
 
+#include "bcm2835.h"
 #include "marte_pistorms_sensors.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,30 +22,31 @@ int data;
  * */
 int pistorms_port_set_type_sensor(int connector_id, int type){
   
-    char bufType[2];
-    bufType[0] = 0;
-    bufType[1] = type;	/**< Value of Type mode */
+  char bufType[2];
+  bufType[0] = 0;
+  bufType[1] = type;	/**< Value of Type mode */
   
-    _set_active_bank(connector_id);
+  _set_active_bank(connector_id);
+  
+  if((connector_id == BANK_A_PORT_1) ||(connector_id == BANK_B_PORT_1)){
+    bufType[0] = PORT_TYPE_1;
     
-    if((connector_id == BANK_A_PORT_1) ||(connector_id == BANK_B_PORT_1)){
-	bufType[0] = PORT_TYPE_1;
-       
-    }else if((connector_id == BANK_A_PORT_2) ||(connector_id == BANK_B_PORT_2)){
-	bufType[0] = PORT_TYPE_2;
-      
-    } else {
-      return PISTORMS_ERROR_NOT_CONNECTOR;
-      
-    }
+  }else if((connector_id == BANK_A_PORT_2) ||(connector_id == BANK_B_PORT_2)){
+    bufType[0] = PORT_TYPE_2;
     
- 
-    data = bcm2835_i2c_write(bufType,2);
-    //bcm2835_i2c_read_register_rs(&type,bufT,1);
-   // printf("Type : %d\n",bufT[0]);
-    return data;
-   
-   
+  } else {
+    return PISTORMS_ERROR_NOT_CONNECTOR;
+    
+  }
+  
+  
+  data = bcm2835_i2c_write(bufType,2);
+  
+  delay(1000);
+  
+  return data;
+  
+  
 }
 
 /*
@@ -52,55 +54,55 @@ int pistorms_port_set_type_sensor(int connector_id, int type){
  * */
 int pistorms_sensor_get_mode(int connector_id){
   
-    int value = 0;
-    char bufSensorMode[10] = {0};
-    char sensorMode; 
+  int value = 0;
+  char bufSensorMode[10] = {0};
+  char sensorMode; 
   
-     _set_active_bank(connector_id);
+  _set_active_bank(connector_id);
+  
+  if((connector_id == BANK_A_PORT_1) ||(connector_id == BANK_B_PORT_1)){
+    sensorMode = PORT_1_MODE;
     
-     if((connector_id == BANK_A_PORT_1) ||(connector_id == BANK_B_PORT_1)){
-	sensorMode = PORT_1_MODE;
-       
-    }else if((connector_id == BANK_A_PORT_2) ||(connector_id == BANK_B_PORT_2)){
-	sensorMode = PORT_2_MODE;
-      
-    } else {
-      return PISTORMS_ERROR_NOT_CONNECTOR;
-      
-    }
+  }else if((connector_id == BANK_A_PORT_2) ||(connector_id == BANK_B_PORT_2)){
+    sensorMode = PORT_2_MODE;
+    
+  } else {
+    return PISTORMS_ERROR_NOT_CONNECTOR;
+    
+  }
   
-    bcm2835_i2c_read_register_rs(&sensorMode,bufSensorMode,1);/**< Read number of bytes of the requerided register*/
-    value = bufSensorMode[0];
-    return value;
- 
+  bcm2835_i2c_read_register_rs(&sensorMode,bufSensorMode,1);/**< Read number of bytes of the requerided register*/
+  value = bufSensorMode[0];
+  return value;
+  
 }
-  
+
 
 /*
  * Set the mode of EV3 Sensor Modes (Color,Gyro,Infrared,Proximiy)
  * */
 int pistorms_sensor_set_mode(int connector_id, int mode){
   
-    char bufMode[2];
-    bufMode[0] =0;
-    bufMode[1] = mode;
+  char bufMode[2];
+  bufMode[0] =0;
+  bufMode[1] = mode;
+  
+  _set_active_bank(connector_id);
+  
+  if((connector_id == BANK_A_PORT_1) ||(connector_id == BANK_B_PORT_1)){
+    bufMode[0] = PORT_1_MODE;
     
-     _set_active_bank(connector_id);
+  }else if((connector_id == BANK_A_PORT_2) ||(connector_id == BANK_B_PORT_2)){
+    bufMode[0] = PORT_2_MODE;
     
-    if((connector_id == BANK_A_PORT_1) ||(connector_id == BANK_B_PORT_1)){
-	bufMode[0] = PORT_1_MODE;
-       
-    }else if((connector_id == BANK_A_PORT_2) ||(connector_id == BANK_B_PORT_2)){
-	bufMode[0] = PORT_2_MODE;
-      
-    } else {
-      return PISTORMS_ERROR_NOT_CONNECTOR;
-      
-    }
+  } else {
+    return PISTORMS_ERROR_NOT_CONNECTOR;
     
-     data = bcm2835_i2c_write(bufMode,2);
-     return data;
- 
+  }
+  
+  data = bcm2835_i2c_write(bufMode,2);
+  return data;
+  
 }  
 
 /*
@@ -108,24 +110,26 @@ int pistorms_sensor_set_mode(int connector_id, int mode){
  * */
 char * pistorms_sensor_read(int connector_id){
   
-    //char bufSensorData[32] = {0};
-    char sensorData;
-
-     _set_active_bank(connector_id);
-    
-     if((connector_id == BANK_A_PORT_1) ||(connector_id == BANK_B_PORT_1)){
-	sensorData = PORT_1_DATA;
-       
-    }else if((connector_id == BANK_A_PORT_2) ||(connector_id == BANK_B_PORT_2)){
-	sensorData = PORT_2_DATA;
-      
-    } else {
-      return PISTORMS_ERROR_BAD_CONNECTOR;
-      
-    }
+  char sensorData;
   
-    bcm2835_i2c_read_register_rs(&sensorData,sensor_data,4);
-    return sensor_data;
+  _set_active_bank(connector_id);
+  
+  if((connector_id == BANK_A_PORT_1) ||(connector_id == BANK_B_PORT_1)){
+    
+    sensorData = PORT_1_DATA;
+    
+  }else if((connector_id == BANK_A_PORT_2) ||(connector_id == BANK_B_PORT_2)){
+    
+    sensorData = PORT_2_DATA;
+    
+  } else {
+    
+    return PISTORMS_ERROR_BAD_CONNECTOR;
+    
+  }
+  
+  bcm2835_i2c_read_register_rs(&sensorData,sensor_data,4);
+  return sensor_data;
   
   
 }

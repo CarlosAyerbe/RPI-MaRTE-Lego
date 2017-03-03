@@ -6,6 +6,11 @@
 // Author: Mike McCauley
 // Copyright (C) 2011-2013 Mike McCauley
 // $Id: bcm2835.c,v 1.23 2015/03/31 04:55:41 mikem Exp mikem $
+
+
+// Adapted to MaRTE OS by Carlos Ayerbe
+//  - Remove memory mapping (removed the use of mmap and fcntl)
+//  - Uncomment define I2C_V1 (for RPi version 1)
 */
 
 

@@ -18,49 +18,49 @@
 #include "marte_pistorms_sensors.h"
 
 /**
-* @brief Detects if the Ultrasonic Sensor is connect correctly.
-* @param connector_id Bank and Port to plug the sensor
-* @return  0 if there is an error, or 1 if the sensor is correct.
-* 
-* If the Ultrasonic sensor is connect, the function is going to return 1 if it is connect correctly
-* or 0 if it isn't.
-* 
-*/
+ * @brief Detects if the Ultrasonic Sensor is connect correctly.
+ * @param connector_id Bank and Port to plug the sensor
+ * @return  0 if there is an error, or 1 if the sensor is correct.
+ * 
+ * If the Ultrasonic sensor is connect, the function is going to return 1 if it is connect correctly
+ * or 0 if it isn't.
+ * 
+ */
 int pistorms_sensor_proof_ultrasonic(int connector_id);
 
 /**
-* @brief Ultrasonic sensor can measure the distance to an object in front of it
-* @param connector_id Bank and Port to plug the sensor
-* @return  distance to an object in milimeters.
-* 
-* The detectable distance is between 30 and 2500 milimeters
-* (with an accuracy of +/- 10 milimeters).
-* A value of 2550 milimeters means the sensor is not able to detect any 
-* object in front of it.
-*/
-int pistorms_ultrasonicDistanceMM(int connector_id);
+ * @brief Ultrasonic sensor can measure the distance to an object in front of it
+ * @param connector_id Bank and Port to plug the sensor
+ * @return  distance to an object in centimeters.
+ * 
+ * The detectable distance is between 3 and 250 centimeters
+ * (with an accuracy of +/- 1 centimeters).
+ * A value of 255 centimeters means the sensor is not able to detect any 
+ * object in front of it.
+ */
+float pistorms_ultrasonicDistanceCM(int connector_id);
 
 /**
-* @brief Ultrasonic sensor can measure the distance to an object in front of it
-* @param connector_id Bank and Port to plug the sensor
-* @return  distance to an object in inches.
-* 
-* The measurable distance is between 1 and 99 inches 
-* (with an accuracy of +/- 0.394 inches).
-* A value of 100 inches means the sensor is not able to detect any 
-* object in front of it.
-*/
-int pistorms_ultrasonicDistanceIN(int connector_id);
+ * @brief Ultrasonic sensor can measure the distance to an object in front of it
+ * @param connector_id Bank and Port to plug the sensor
+ * @return  distance to an object in inches.
+ * 
+ * The measurable distance is between 1 and 99 inches 
+ * (with an accuracy of +/- 0.394 inches).
+ * A value of 100 inches means the sensor is not able to detect any 
+ * object in front of it.
+ */
+float pistorms_ultrasonicDistanceIN(int connector_id);
 
 /**
-* @brief Ultrasonic sensor can detect another Ultrasonic Sensor operating nearby.
-* @param connector_id Bank and Port to plug the sensor
-* @return  1 if there is another Ultrasonic sensor, or 0 if not.
-* 
-* In Presence Mode, this sensor can detect another Ultrasonic Sensor
-* operating nearby. When listening for presence, the sensor detects
-* sound signals but does not send them.
-*/
+ * @brief Ultrasonic sensor can detect another Ultrasonic Sensor operating nearby.
+ * @param connector_id Bank and Port to plug the sensor
+ * @return  1 if there is another Ultrasonic sensor, or 0 if not.
+ * 
+ * In Presence Mode, this sensor can detect another Ultrasonic Sensor
+ * operating nearby. When listening for presence, the sensor detects
+ * sound signals but does not send them.
+ */
 int pistorms_ultrasonicPresence(int connector_id);
 
 
