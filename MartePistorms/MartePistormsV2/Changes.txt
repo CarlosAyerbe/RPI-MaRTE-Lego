@@ -1,0 +1,9 @@
+
+
+-> Reorganización de marte_pistorms.h
+-> Renombre de varias funciones y cambio de la lógica de la función "proof" ahora "configure"
+-> Creación de la librería marte_pistorms_internal.h para crear el debugger
+-> Optimización de bucles
+-> Creación de los Pistorms Codes para los errores y los métodos que no retornaban nada
+-> Corregir los delay() que sobran
+-> Creacion del main_coche.c
