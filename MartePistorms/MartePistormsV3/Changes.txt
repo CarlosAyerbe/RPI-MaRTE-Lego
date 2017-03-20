@@ -1,0 +1,10 @@
+
+
+-> Corregido error en marte_pistorms_sensors.h referencia a pistorms.h no existe error. Ahora es marte_pistorms.h PistormsCodes
+-> Quitar del marte_pistorms_motors.h marte_pistorms_brick.h las funciones internas de bank_sync...
+-> Borrar las dos funciones que sobran en el Ultrasonic.c/.h
+-> Quitar los delay que no servían y  añadir nanosleep(...)
+-> Renombramiento de ULTRASONIC-GYRO-TOUCH-MOTOR + _ADDR en el main_coche.c
+-> Cambiado el nombre de la funcion "int pistorms_ultrasonic_set_running_time(int connector_id, int seconds)"
+-> Cambiado el nombre de motor_break a motor_brake
+-> Cambiado el motor_get_pos(int connector_id) ahora ms efectivo
