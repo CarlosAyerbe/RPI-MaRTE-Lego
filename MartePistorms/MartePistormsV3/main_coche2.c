@@ -37,10 +37,11 @@ int main(int argc, char **argv) {
   pistorms_brick_led_On(LED_B,0,255,0);	//Green Led
   
   pistorms_motor_reset_all_parameters(MOTORS_BANK_B);
-  
+  sleep(1);
   
   while(!pistorms_brick_get_key_press_value()){
     
+  
     pistorms_motor_set_speed(MOTOR_1,-50);//Negative speed is due to the position of the motor.
     pistorms_motor_set_speed(MOTOR_2,-50);
     
@@ -64,18 +65,18 @@ int main(int argc, char **argv) {
       pistorms_motor_go(MOTOR_1 ,SPEED_GO | TIME_GO);
       pistorms_motor_go(MOTOR_2 ,SPEED_GO | TIME_GO);
       
-      sleep(3);//Waiting tthre seconds for the movement of the car.
+      sleep(3);//Waiting three seconds for the movement of the car.
       
       pistorms_motor_brake_sync(MOTORS_BANK_B);
-      sleep(1);
+      //sleep(1);
       
       pistorms_motor_reset_pos(MOTOR_1);
       pistorms_motor_reset_pos(MOTOR_2);
       
       pistorms_motor_set_speed(MOTOR_1,-30);
       pistorms_motor_set_speed(MOTOR_2,30);
-      pistorms_motor_set_running_time(MOTOR_1,1);
-      pistorms_motor_set_running_time(MOTOR_2,1);
+      pistorms_motor_set_running_time(MOTOR_1,2);
+      pistorms_motor_set_running_time(MOTOR_2,2);
       
       pistorms_motor_go(MOTOR_1 ,SPEED_GO | TIME_GO);
       pistorms_motor_go(MOTOR_2 ,SPEED_GO | TIME_GO);

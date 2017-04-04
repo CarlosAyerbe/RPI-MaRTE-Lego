@@ -1,6 +1,7 @@
 //#include "marte_pistorms_sensor_touch.h"
 //#include "marte_pistorms_sensor_ultrasonic.h"
 //#include "marte_pistorms_sensor_gyro.h"
+#include "marte_pistorms_sensor_color.h"
 #include "marte_pistorms_brick.h"
 #include "marte_pistorms_motors.h"
 #include "marte_pistorms.h"
@@ -36,7 +37,7 @@ int main(int argc, char **argv) {
    struct timespec start, end,start2,end2, resolution;
    unsigned long int nanos, res , mediaNanos;
    long buffer[5];
-   int i = 0;
+   //int i = 0;
    long media, p;
    short g;
    
@@ -95,6 +96,7 @@ pistorms_brick_touch_screen_Y_asis();
   
   */
   
+  /*
   char s = 0x83;
 
   char bufS[10] = {0};
@@ -127,8 +129,62 @@ pistorms_brick_touch_screen_Y_asis();
   bcm2835_i2c_read_register_rs(&s,bufS,1);
   printf("Sensor Color = %d",bufS[0]);
   sleep(3);
+  
+  */
+  
+  int light,i,reflected,color;
+  
+  pistorms_sensor_color_configure(COLOR_ADDR);
+  sleep(1);
+  i = 0;
+  
+  while(i<5){
+    sleep(3);
+    
+    reflected = pistorms_color_read_light(COLOR_ADDR, REFLECTED);
+    
+    printf("REFLECTED =%d",reflected);
+    
+    i++;
   }
- 
+  
+  i = 0;
+  
+  while(i<5){
+    
+    sleep(3);
+    
+    light = pistorms_color_read_light(COLOR_ADDR, AMBIENT);
+    
+    printf("AMBIENT =%d",light);
+    
+    i++;
+  }
+  
+  i = 0;
+  
+  while(i<5){
+    
+    sleep(3);
+    color =  pistorms_color_measure(COLOR_ADDR);
+    
+    printf("MEASURE=%d",color);
+    
+    i++;
+  }
+  i=0;
+  while(i<5){
+    sleep(3);
+    
+    reflected = pistorms_color_read_light(COLOR_ADDR, REFLECTED);
+    
+    printf("REFLECTED =%d",reflected);
+    
+    i++;
+  }
+  
+  
+  
 
 }
     
